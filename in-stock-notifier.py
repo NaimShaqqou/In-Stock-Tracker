@@ -22,12 +22,7 @@ search_bar.send_keys(Keys.RETURN)
 
 # click on all the results and as soon as one is found
 # send a notification
-while(True):
-    result = driver.find_element(By.PARTIAL_LINK_TEXT, 'GeForce RTX 3060')
-    result.click()
-    driver.implicitly_wait(10)
-    driver.back()
-    driver.implicitly_wait(10)
 
-while(True):
-    pass
+result = driver.find_element(By.PARTIAL_LINK_TEXT, 'GeForce RTX 3060')
+result.click()
+driver.implicitly_wait(10)
