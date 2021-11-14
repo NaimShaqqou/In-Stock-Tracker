@@ -34,7 +34,8 @@ def check_stock(webpage, search) :
     else:
         return search_bestbuy(search, driver)
 
-
+# searches for 'search' in the website
+# returns whether the product is in stock or no
 def search_newegg(search, driver):
     # search for the product
     search_bar = driver.find_element(By.CSS_SELECTOR, "input[type='search']")
@@ -46,11 +47,35 @@ def search_newegg(search, driver):
     try:
         result = driver.find_element(By.PARTIAL_LINK_TEXT, search)
         result.click()
+        driver.implicitly_wait(2)
     except NoSuchElementException:
         return f'{search} was not found on Newegg.com'
 
+    # check if in stock
     try:
         button = driver.find_element(By.XPATH, '//button[text()="Add to cart "]')
+        return f'Item currently in stock!{os.linesep}{driver.current_url}'
+    except NoSuchElementException:
+        return f'Item currently out of stock!{os.linesep}{driver.current_url}'
+
+def search_amazon(search, driver):
+    # search for the product
+    search_bar = driver.find_element(By.ID, 'twotabsearchtextbox')
+    search_bar.send_keys(search)
+    search_bar.send_keys(Keys.RETURN)
+    driver.implicitly_wait(2)
+
+    # click on listing
+    try:
+        result = driver.find_element(By.CSS_SELECTOR, "img[class='s-image']")
+        result.click()
+        driver.implicitly_wait(2)
+    except NoSuchElementException:
+        return f'{search} was not found on Amazon.com'
+
+    # check if in stock
+    try:
+        button = driver.find_element(By.ID, 'add-to-cart-button')
         return f'Item currently in stock!{os.linesep}{driver.current_url}'
     except NoSuchElementException:
         return f'Item currently out of stock!{os.linesep}{driver.current_url}'
