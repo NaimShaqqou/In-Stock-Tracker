@@ -26,10 +26,6 @@ def check_stock(webpage, search) :
     # search for product and return result
     if webpage in 'amazon':
         return search_amazon(search, driver)
-    elif webpage in 'ebay':
-        return search_ebay(search, driver)
-    elif webpage in 'walmart':
-        return search_walmart(search, driver)
     elif webpage in 'newegg':
         return search_newegg(search, driver)
     else:
@@ -117,5 +113,3 @@ def search_bestbuy(search, driver):
         return f'Item currently in stock!{os.linesep}{driver.current_url}'
     except NoSuchElementException:
         return f'Item currently out of stock!{os.linesep}{driver.current_url}'
-
-print(check_stock('bestbuy', 'headphone'))
