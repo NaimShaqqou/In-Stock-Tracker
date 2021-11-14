@@ -11,7 +11,7 @@ import os
 def run_chrome() :
     ser = Service(ChromeDriverManager().install())
     opt = Options()
-    #opt.headless=True
+    opt.headless=True
     driver = webdriver.Chrome(service=ser, options=opt)
     return driver
 
