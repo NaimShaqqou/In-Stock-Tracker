@@ -2,8 +2,10 @@ import discord
 import random
 from discord.ext import commands
 
-client = commands.Bot(command_prefix='')
+TOKEN = 'OTA5MTc3OTQwMzk3NDEyMzky.YZAf8A.neUkaL_TepA-jiRIjJB3khUIPWQ'
+tracking_list = []
 
+client = commands.Bot(command_prefix='')
 discord.Intents.all()
 
 
@@ -23,6 +25,19 @@ async def on_member_remove(ctx, member):
 
 
 @client.command()
+async def track(ctx, message):
+    if 'https://' in message:
+        await ctx.send(f"Now tracking: {message}")
+        tracking_list.append(message)
+
+
+@client.command()
+async def List(ctx):
+    for i in tracking_list:
+        await ctx.send(f'{i}\n')
+
+
+@client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
 
@@ -37,6 +52,4 @@ async def roll(ctx):
     await ctx.send(f'Roll: {random.randint(1, 6)}')
 
 
-
-
-client.run('OTA5MTc3OTQwMzk3NDEyMzky.YZAf8A.neUkaL_TepA-jiRIjJB3khUIPWQ')
+client.run(TOKEN)
