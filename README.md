@@ -1,4 +1,4 @@
-# in-stock-notifier
+# In Stock Tracker
 **Date:** 1/12/2021 9PM - 11/14/2021 9AM **Event:** Knight Hacks 2021 **Project Name:** In Stock Tracker **Team Members:** Naim Shaqqou, Misael Salazar
 
 ## Tools Used
